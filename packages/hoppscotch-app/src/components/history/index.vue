@@ -165,6 +165,7 @@ import IconFilter from "~icons/lucide/filter"
 import { computed, ref, Ref } from "vue"
 import { useColorMode } from "@composables/theming"
 import {
+  HoppGQLRequest,
   HoppRESTRequest,
   isEqualHoppRESTRequest,
   safelyExtractRESTRequest,
@@ -306,11 +307,11 @@ const filteredHistoryGroups = computed(() =>
   )
 )
 
-const getAppropriateURL = (entry: HistoryEntry): string => {
+const getAppropriateURL = (entry: HistoryEntry) => {
   if (props.page === "rest") {
-    return entry.request.endpoint
+    return (entry.request as HoppRESTRequest).endpoint
   } else if (props.page === "graphql") {
-    return entry.request.url
+    return (entry.request as HoppGQLRequest).url
   }
 }
 
